@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   useParams,
   Link,
@@ -14,6 +14,7 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const previousLocationRef = useRef(location.state?.from || "/movies");
 
   useEffect(() => {
     const loadMovieDetails = async () => {
@@ -24,17 +25,7 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   const handleGoBack = () => {
-    if (location.state && location.state.from) {
-      navigate(location.state.from);
-    } else {
-      const queryParams = new URLSearchParams(location.search);
-      const searchQuery = queryParams.get("query");
-      if (searchQuery) {
-        navigate(`/movies?query=${searchQuery}`);
-      } else {
-        navigate("/movies");
-      }
-    }
+    navigate(previousLocationRef.current);
   };
 
   if (!movie) return <p>Loading...</p>;
@@ -73,24 +64,14 @@ const MovieDetailsPage = () => {
       <nav className={classes.additionalInfo}>
         <Link
           to="cast"
-          state={{
-            from:
-              location.state.from ||
-              "/movies?query=" +
-                new URLSearchParams(location.search).get("query"),
-          }}
+          state={{ from: previousLocationRef.current }}
           className={classes.link}
         >
           Cast
         </Link>
         <Link
           to="reviews"
-          state={{
-            from:
-              location.state.from ||
-              "/movies?query=" +
-                new URLSearchParams(location.search).get("query"),
-          }}
+          state={{ from: previousLocationRef.current }}
           className={classes.link}
         >
           Reviews

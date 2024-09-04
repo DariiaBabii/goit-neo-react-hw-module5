@@ -1,29 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { fetchMovies } from "../api";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./MovieList.module.css";
 
-const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-  const location = useLocation();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const movieData = await fetchMovies();
-      setMovies(movieData);
-    };
-
-    fetchData();
-  }, []);
-
+const MovieList = ({ movies, location }) => {
   return (
     <div className={classes["movies-container"]}>
       <div className={classes["movies-row"]}>
         {movies.map((movie) => (
-          <div
-            className={`${classes["movie-card-wrapper"]} ${classes["movie-card-wrapper-sm"]} py-3`}
-            key={movie.id}
-          >
+          <div key={movie.id} className={classes["movie-card-wrapper"]}>
             <div className={classes["movie-card"]}>
               <Link to={`/movies/${movie.id}`} state={{ from: location }}>
                 <img

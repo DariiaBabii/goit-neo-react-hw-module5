@@ -1,36 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useSearchParams, Link, useLocation } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { searchMovies } from "../api";
+import MovieList from "../components/MovieList";
 import classes from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const location = useLocation();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const searchQuery = queryParams.get("query");
+    const searchQuery = searchParams.get("query") || "";
 
     if (searchQuery) {
+      searchMovies(searchQuery).then(setMovies);
       setQuery(searchQuery);
-      handleSearch(searchQuery);
     }
-  }, [location.search]);
-
-  const handleSearch = async (searchQuery) => {
-    const searchResults = await searchMovies(searchQuery);
-    setMovies(searchResults);
-
-    navigate(`/movies?query=${searchQuery}`, { replace: true });
-  };
+  }, [searchParams]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (query.trim()) {
-      handleSearch(query);
+      setSearchParams({ query: query.trim() });
     }
   };
 
@@ -49,17 +43,7 @@ const MoviesPage = () => {
           <FiSearch size="16px" />
         </button>
       </form>
-      {movies.length > 0 && (
-        <ul className={classes["movies-list"]}>
-          {movies.map((movie) => (
-            <li key={movie.id} className={classes["movies-list-item"]}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                {movie.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {movies.length > 0 && <MovieList movies={movies} location={location} />}
     </div>
   );
 };
