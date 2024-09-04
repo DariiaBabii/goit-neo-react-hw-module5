@@ -1,0 +1,81 @@
+.movies-container {
+  padding: 2rem;
+  background-color: #f4f4f4;
+}
+
+.movies-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.search-form {
+  width: 400px;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.search-input {
+  width: 90%;
+  height: 20px;
+
+  border-style: none;
+  border-bottom: 1px solid #212121;
+  background-color: transparent;
+
+  padding: 16px;
+  padding-right: 40px;
+  outline: none;
+
+  transition: border-color 0.3s ease;
+
+  font-size: 18px;
+  color: #212121;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+.search-input::placeholder {
+  font-weight: 200;
+}
+
+.search-input:focus {
+  border-color: #333;
+}
+
+.button {
+  width: 50px;
+  height: 50px;
+
+  font-size: 20px;
+  font-weight: bold;
+  color: #212121;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.movies-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.movies-list-item {
+  margin-bottom: 1rem;
+}
+
+.movies-list-item a {
+  text-decoration: none;
+  font-size: 1.25rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.movies-list-item a:hover {
+  color: #9bcf62;
+}

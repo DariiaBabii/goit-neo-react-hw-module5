@@ -1,0 +1,46 @@
+.castContainer {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.castList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.castItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+
+.actorImage {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.actorName {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #222;
+}
+
+.actorCharacter {
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+}
